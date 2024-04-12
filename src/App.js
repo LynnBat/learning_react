@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
 
-function App() {
+export default function MyApp() {
+  const [welcomeText, setNewText] = useState('Hello, world!');
+  const name = ['James', 'Marry', 'Patrick', 'Jennifer', 'Robert', 'Linda', 'Richard', 'Lisa', 'William'];
+  const randomName = name[Math.floor(Math.random() * name.length)];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: 'grid', justifyContent: 'center' }}>
+      <h1 style={{ backgroundColor: 'yellow', color: 'green', fontSize: '50px' }}> {welcomeText}</h1>
+      <button style={{ backgroundColor: 'green', color: 'yellow', padding: '10px 20px', fontSize: '20px', borderRadius: '12px' }}
+ onClick={() => setNewText('Hello, ' + randomName + '!') }>
+        Halo </button>
     </div>
   );
 }
-
-export default App;
