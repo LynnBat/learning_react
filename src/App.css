@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-image: url('/public/cute-bunny.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  display: grid;
+  text-align: center;
+  justify-content: center;
+}
+
+h1 {
+  background-color: yellow;
+  color: rgb(9, 92, 9);
+  font-size: 50px;
+}
+
+button {
+  background-color: #0dcd87;
+  color: rgb(246, 246, 75);
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 12px;
+}
+
+button:hover {
+  background-color: #046D42;
+  color: white;
+  cursor: pointer;
+}
