@@ -1,13 +1,22 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import MyApp from './App';
 
 describe('My App', () => {
   beforeEach(() => {
-    render(<MyApp />); 
+    global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve({ results: [{ name: { first: 'Alice' } }] })
+    })
+  );
+    render(<MyApp greeting="Hello, John!" />); 
   })
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('loads and displays greeting', async () => {
-    expect(screen.getByText('Hello, world!')).toBeInTheDocument();
+    expect(screen.getByText('Hello, John!')).toBeInTheDocument();
   })
   
   it('has a button', () => {
@@ -15,11 +24,12 @@ describe('My App', () => {
   });
 
   describe('Button', () => {
-    it('changes text upon clicking', () => {
-      expect(screen.getByText('Hello, world!')).toBeInTheDocument();
-    
+    it('changes text upon clicking', async () => {
       screen.getByRole('button').click();
-      expect(screen.getByText(/Hello, [A-Za-z]+!/)).not.toEqual('Hello, world!');
+
+      await waitFor(() => {
+        expect(screen.getByText('Hello, Alice!')).toBeInTheDocument();
+      });
     });
   })
 })

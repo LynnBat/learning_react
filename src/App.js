@@ -10,8 +10,8 @@ function randomName() {
         });
 };
 
-export default function MyApp() {
-  const [welcomeText, setNewText] = useState('Hello, world!');
+export default function MyApp({greeting = 'Hello, world!'}) {
+  const [welcomeText, setNewText] = useState(greeting);
 
   const handleClick = useCallback(async () => {
     const name = await randomName()
