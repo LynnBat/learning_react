@@ -1,20 +1,35 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import MyApp from './App';
 
-test('loads and displays greeting', async () => {
-  render(<MyApp />); 
-  expect(screen.getByText('Hello, world!')).toBeInTheDocument();
+describe('My App', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve({ results: [{ name: { first: 'Alice' } }] })
+    })
+  );
+    render(<MyApp greeting="Hello, John!" />); 
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('loads and displays greeting', async () => {
+    expect(screen.getByText('Hello, John!')).toBeInTheDocument();
+  })
+  
+  it('has a button', () => {
+    expect(screen.getByRole('button')).toBeEnabled();
+  });
+
+  describe('Button', () => {
+    it('changes text upon clicking', async () => {
+      screen.getByRole('button').click();
+
+      await waitFor(() => {
+        expect(screen.getByText('Hello, Alice!')).toBeInTheDocument();
+      });
+    });
+  })
 })
-
-test('button is present', () => {
-  render(<MyApp />);
-  expect(screen.getByRole('button')).toBeEnabled();
-});
-
-test('button changes text upon clicking', () => {
-  render(<MyApp />);
-  expect(screen.getByText('Hello, world!'));
-
-  screen.getByRole('button').click();
-  expect(screen.getByText('Hello, world!')).not.toEqual('Hello, world!');
-});

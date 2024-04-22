@@ -1,20 +1,28 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import './App.css';
 
-function RandomName() {
-  const name = ['James', 'Marry', 'Patrick', 'Jennifer', 'Robert', 'Linda', 'Richard', 'Lisa', 'William'];
-  return name[Math.floor(Math.random() * name.length)];
-}
+function randomName() {
+  return fetch('https://randomuser.me/api/?results=1')
+      .then((response) => response.json())
+      .then((data) => data.results[0].name.first)
+      .catch((err) => {
+        console.log(err.message);
+        });
+};
 
-export default function MyApp() {
-  const [welcomeText, setNewText] = useState('Hello, world!');
-  const randomName = RandomName();
+export default function MyApp({greeting = 'Hello, world!'}) {
+  const [welcomeText, setNewText] = useState(greeting);
+
+  const handleClick = useCallback(async () => {
+    const name = await randomName()
+    setNewText('Hello, ' + name + '!')
+  }, [])
 
   return (
     <div>
       <h1> {welcomeText}</h1>
-      <button className='greenButton' onClick={() => setNewText('Hello, ' + randomName + '!') }>
+      <button className='greenButton' onClick={handleClick}>
         Halo </button>
     </div>
-  );
+  )
 }
