@@ -1,13 +1,14 @@
 import { useState, useCallback } from 'react';
 import './App.css';
 
-function randomName() {
-  return fetch('https://randomuser.me/api/?results=1')
-      .then((response) => response.json())
-      .then((data) => data.results[0].name.first)
-      .catch((err) => {
-        console.log(err.message);
-        });
+async function randomName() {
+  try {
+    const response = await fetch('https://randomuser.me/api/?results=1');
+    const data = await response.json();
+    return data.results[0].name.first;
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
 export default function MyApp({greeting = 'Hello, world!'}) {
