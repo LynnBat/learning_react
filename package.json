@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -21,7 +21,10 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "react/react-in-jsx-scope": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -36,7 +39,7 @@
     ]
   },
   "devDependencies": {
-    "jest": "^27.5.1",
-    "@babel/plugin-proposal-private-property-in-object": "^x.x.x"
+    "@babel/plugin-proposal-private-property-in-object": "^x.x.x",
+    "jest": "^27.5.1"
   }
 }
