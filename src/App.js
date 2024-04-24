@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Example from './pages/Example';
 
 async function randomName() {
   try {
@@ -11,7 +13,7 @@ async function randomName() {
   }
 };
 
-export default function MyApp({greeting = 'Hello, world!'}) {
+function MyApp({greeting = 'Hello, world!'}) {
   const [welcomeText, setNewText] = useState(greeting);
 
   const handleClick = useCallback(async () => {
@@ -27,3 +29,16 @@ export default function MyApp({greeting = 'Hello, world!'}) {
     </div>
   )
 }
+
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MyApp />} />
+        <Route path="/example" element={<Example />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
