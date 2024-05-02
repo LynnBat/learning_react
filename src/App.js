@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Example from './pages/Example';
+import Providers from './pages/Providers';
 
 async function randomName() {
   try {
@@ -36,6 +37,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MyApp />} />
         <Route path="/example" element={<Example />} />
+        <Route path="/providers" element={<Providers />} />
       </Routes>
     </Router>
   );
