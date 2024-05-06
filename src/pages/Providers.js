@@ -1,19 +1,35 @@
+import { useState, useEffect } from 'react';
+
 let endpoint = '/api/v1/providers/SE'
 
 async function fetchProviders() {
   try {
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    });
     const data = await response.json();
-    return data.providers;
+    return data.providers.map(provider => ({
+      displayName: provider.displayName,
+      icon: provider.images.icon
+    }))
   } catch (err) {
     console.log(err.message);
   }
 };
 
 const Providers = () => {
-  const providerList = fetchProviders();
+  const [providers, setProviders] = useState([]);
 
-  console.log(providerList);
+  useEffect(() => {
+    fetchProviders().then(providers => {
+      setProviders(providers);
+    });
+  }, []);
+
+  console.log(providers);
 
   return (
     <div>
