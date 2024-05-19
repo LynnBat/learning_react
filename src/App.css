@@ -67,3 +67,26 @@ button:hover {
   color: white;
   cursor: pointer;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 3px;
+  margin-top: 25px;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.icon {
+  width: 50px;
+}
+
+.name {
+  margin-top: 5px;
+}

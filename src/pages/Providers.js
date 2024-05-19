@@ -32,8 +32,13 @@ const Providers = () => {
   console.log(providers);
 
   return (
-    <div>
-      <h1>Example Page</h1>
+    <div className="grid-container">
+      {providers.map((provider, index) => (
+        <div key={index} className="grid-item">
+          <img src={provider.icon} alt={provider.displayName} className="icon" />
+          <div className="name">{provider.displayName}</div>
+        </div>
+      ))}
     </div>
   );
 };
