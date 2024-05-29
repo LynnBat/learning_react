@@ -23,10 +23,12 @@ function MyApp({greeting = 'Hello, world!'}) {
   }, [])
 
   return (
-    <div>
-      <h1> {welcomeText}</h1>
-      <button className='greenButton' onClick={handleClick}>
-        Halo </button>
+    <div className="example-page">
+      <div className="content">
+        <h1> {welcomeText}</h1>
+        <button className='greenButton' onClick={handleClick}>
+          Halo </button>
+      </div>
     </div>
   )
 }
