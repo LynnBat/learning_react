@@ -37,15 +37,18 @@
   }
 }
 
-body {
+.example-page {
   background-image: url('/public/cute-bunny.jpg');
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
   background-attachment: fixed;
   display: grid;
   text-align: center;
   justify-content: center;
+  height: 100vh;
+  grid-template-rows: auto 1fr auto;
 }
+
 
 h1 {
   background-color: yellow;
@@ -66,4 +69,54 @@ button:hover {
   background-color: #046D42;
   color: white;
   cursor: pointer;
+}
+
+.icon {
+  width: 50px;
+}
+
+.name {
+  margin-top: 5px;
+}
+
+a {
+  color: #2c1a58;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #030206;
+}
+
+.provider-page {
+  background-image: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.provider-block {
+  background-color: #f2f2f2;
+  border-radius: 15px;
+  padding: 20px;
+  width: 80%;
+  height: 80%;
+  overflow-y: auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px 3px;
+  padding: 30px;
+  list-style: none;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
