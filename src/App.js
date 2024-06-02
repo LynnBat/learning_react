@@ -3,6 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Example from './pages/Example';
 import Providers from './pages/Providers';
+import GroupedProviders from './pages/GroupedProviders';
+import { ProviderProvider } from './pages/ProviderContext';
 
 async function randomName() {
   try {
@@ -35,13 +37,16 @@ function MyApp({greeting = 'Hello, world!'}) {
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MyApp />} />
-        <Route path="/example" element={<Example />} />
-        <Route path="/providers" element={<Providers />} />
-      </Routes>
-    </Router>
+    <ProviderProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MyApp />} />
+          <Route path="/example" element={<Example />} />
+          <Route path="/providers" element={<Providers />} />
+          <Route path="/provider" element={<GroupedProviders />} />
+        </Routes>
+      </Router>
+    </ProviderProvider>
   );
 };
 
