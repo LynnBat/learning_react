@@ -24,6 +24,7 @@
       "react-app/jest"
     ],
     "rules": {
+      "import/no-default-export": "on",
       "react/react-in-jsx-scope": "off"
     }
   },
