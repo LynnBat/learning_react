@@ -24,7 +24,7 @@
       "react-app/jest"
     ],
     "rules": {
-      "import/no-default-export": "on",
+      "import/no-default-export": "off",
       "react/react-in-jsx-scope": "off"
     }
   },
@@ -43,5 +43,6 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^x.x.x",
     "jest": "^27.5.1"
-  }
+  },
+  "proxy": "https://api.tink.com"
 }
