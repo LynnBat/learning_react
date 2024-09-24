@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-let endpoint = "/api/v1/providers/DE";
-
-async function fetchProviders() {
+async function fetchProviders(countryCode) {
+  const endpoint = `/api/v1/providers/${countryCode}`;
   try {
     const response = await fetch(endpoint, {
       headers: {
@@ -26,6 +25,7 @@ async function fetchProviders() {
 }
 
 const Providers = () => {
+  const [countryCode, setCountryCode] = useState("SE");
   const [groupedProviders, setGroupedProviders] = useState(new Map());
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedGroup, setSelectedGroup] = useState(
@@ -36,7 +36,9 @@ const Providers = () => {
   );
 
   useEffect(() => {
-    fetchProviders().then((providers) => {
+    const code = searchParams.get("country_code") || "SE";
+    setCountryCode(code);
+    fetchProviders(code).then((providers) => {
       const groupedProviders = Map.groupBy(providers, (provider) => {
         //group be financial institution id
         return provider.groupDisplayName;
@@ -46,11 +48,11 @@ const Providers = () => {
   }, []);
 
   useEffect(() => {
-    const params = {};
+    const params = { country_code: countryCode };
     if (selectedGroup) params.group = selectedGroup;
     if (selectedProvider) params.provider = selectedProvider;
     setSearchParams(params);
-  }, [selectedGroup, selectedProvider, setSearchParams]);
+  }, [selectedGroup, selectedProvider, countryCode, setSearchParams]);
 
   console.log(groupedProviders);
 
@@ -129,7 +131,4 @@ function GroupProvider({ name, value, handleSelectedGroup }) {
 }
 
 export default Providers;
-
-//country as well
 //convert to typescript
-//push the changes
